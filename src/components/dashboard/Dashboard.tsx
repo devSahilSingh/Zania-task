@@ -7,11 +7,9 @@ import { ICard } from "../../types/Common";
 const Dashboard = () => {
   const [cardList, setCardList] = useState<ICard[]>([]);
 
-  console.log(process.env.REACT_APP_API_URL);
-
   // handle fetch api posts and set into cardList
   useEffect(() => {
-    fetch(`posts`)
+    fetch("posts")
       .then((res) => res.json())
       .then((res) => setCardList(res));
   }, []);

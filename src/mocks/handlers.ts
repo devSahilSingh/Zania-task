@@ -52,14 +52,13 @@ const saveDataToLocalStorage = (data: any) => {
 
 // handle GET request to /posts
 export const handlers = [
-  http.get(`posts`, () => {
+  http.get("posts", () => {
     const data = getDataFromLocalStorage();
-    console.log('Handler called for GET ****');
     return HttpResponse.json(data);
   }),
 
   // handle POST request to /posts to add new data
-  http.post(`posts`, async ({ request }) => {
+  http.post("posts", async ({ request }) => {
     const newData = await request.json();
     const currentData = getDataFromLocalStorage();
     currentData.push(newData);

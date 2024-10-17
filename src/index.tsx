@@ -5,24 +5,22 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { worker } from "./mocks/browser";
 
-if (process.env.NODE_ENV === "development") {
-  worker
-    .start()
-    .then(() => {
-      console.log(" **** MSW is running ***** ");
-      const root = ReactDOM.createRoot(
-        document.getElementById("root") as HTMLElement
-      );
-      root.render(
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      );
-    })
-    .catch((error) => {
-      console.error("Failed to start MSW", error);
-    });
-}
+worker
+  .start()
+  .then(() => {
+    console.log(" **** MSW is running ***** ");
+    const root = ReactDOM.createRoot(
+      document.getElementById("root") as HTMLElement
+    );
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+  })
+  .catch((error) => {
+    console.error("Failed to start MSW", error);
+  });
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
