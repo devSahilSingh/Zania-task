@@ -7,9 +7,13 @@ import { ICard } from "../../types/Common";
 const Dashboard = () => {
   const [cardList, setCardList] = useState<ICard[]>([]);
 
+  const BASE_URL = process.env.NODE_ENV === 'production'
+  ? 'https://zania-task-demo.vercel.app'
+  : 'http://localhost:3000';
+
   // handle fetch api posts and set into cardList
   useEffect(() => {
-    fetch("/posts")
+    fetch(`${BASE_URL}/posts`)
       .then((res) => res.json())
       .then((res) => setCardList(res));
   }, []);

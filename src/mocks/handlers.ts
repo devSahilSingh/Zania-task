@@ -33,6 +33,10 @@ const initialData = [
   },
 ];
 
+const BASE_URL = process.env.NODE_ENV === 'production'
+  ? 'https://zania-task-demo.vercel.app'
+  : 'http://localhost:3000';
+
 // Store initial data in localStorage if not already present
 const localStorageKey = "posts";
 if (!localStorage.getItem(localStorageKey)) {
@@ -52,13 +56,13 @@ const saveDataToLocalStorage = (data: any) => {
 
 // handle GET request to /posts
 export const handlers = [
-  http.get("/posts", () => {
+  http.get(`${BASE_URL}/posts`, () => {
     const data = getDataFromLocalStorage();
     return HttpResponse.json(data, { status: 200 });
   }),
 
   // handle POST request to /posts to add new data
-  http.post("/posts", async ({ request }) => {
+  http.post(`${BASE_URL}/posts`, async ({ request }) => {
     const newData = await request.json();
     const currentData = getDataFromLocalStorage();
     currentData.push(newData);
